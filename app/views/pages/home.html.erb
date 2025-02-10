@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="text-center py-5">
+    <h1 class="display-4 mb-4">Welcome to Project Manager</h1>
+    <p class="lead mb-5">
+      Track your projects, collaborate with team members, and get things done.
+    </p>
+    <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+      <%= link_to new_user_registration_path, class: "btn btn-primary btn-lg px-4 gap-3" do %>
+        <i class="bi bi-person-plus"></i> Get Started
+      <% end %>
+      <%= link_to new_user_session_path, class: "btn btn-outline-secondary btn-lg px-4" do %>
+        <i class="bi bi-box-arrow-in-right"></i> Sign In
+      <% end %>
+    </div>
+  </div>
+</div> 

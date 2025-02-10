@@ -11,9 +11,12 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2025_02_05_072809) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "project_event_histories", force: :cascade do |t|
-    t.integer "project_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "project_id", null: false
+    t.bigint "user_id", null: false
     t.integer "event_type", null: false
     t.text "content"
     t.datetime "created_at", null: false
@@ -26,7 +29,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_05_072809) do
     t.string "name"
     t.string "description"
     t.integer "status", default: 0
-    t.integer "owner_id", null: false
+    t.bigint "owner_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_projects_on_owner_id"

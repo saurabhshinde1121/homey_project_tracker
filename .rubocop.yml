@@ -17,13 +17,16 @@ Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 Lint/MissingSuper:
   Enabled: false
+Rails/I18nLocaleTexts:
+  Enabled: false
 Metrics/BlockLength:
   Exclude:
     - config/environments/*
     - config/routes.rb
     - config/initializers/*
+    - spec/**/*
 Metrics/MethodLength:
-  Max: 15
+  Max: 25
 Metrics/ClassLength:
   Max: 100
 Naming/VariableNumber:

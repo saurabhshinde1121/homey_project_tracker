@@ -1,0 +1,22 @@
+.card {
+  border: none;
+  transition: transform 0.2s ease-in-out;
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-header {
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  
+  .card-title {
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+  
+  .card-footer {
+    border-top: 1px solid rgba(0,0,0,0.05);
+    background-color: #f8f9fa;
+  }
+}

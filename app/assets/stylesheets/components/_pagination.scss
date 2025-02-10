@@ -1,0 +1,50 @@
+nav.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  gap: 0.5rem;
+
+  span {
+    display: inline-block;
+    
+    a, span {
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-md);
+      color: var(--primary);
+      text-decoration: none;
+      background: white;
+      border: 1px solid var(--gray-200);
+      min-width: 38px;
+      text-align: center;
+      font-weight: 500;
+      
+      &:hover {
+        background-color: var(--gray-100);
+        border-color: var(--gray-300);
+        color: var(--primary-dark);
+      }
+    }
+    
+    &.current {
+      span {
+        background-color: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+    }
+    
+    &.gap {
+      span {
+        background-color: var(--gray-100);
+        color: var(--gray-500);
+        border-color: var(--gray-200);
+      }
+    }
+    
+    &.prev, &.next, &.first, &.last {
+      a {
+        font-weight: 600;
+      }
+    }
+  }
+}

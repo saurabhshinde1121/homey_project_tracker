@@ -1,0 +1,40 @@
+<div class="card shadow-sm">
+  <div class="card-header bg-white">
+    <h1 class="h3 mb-0"><%= @project.name %></h1>
+    <p class="text-muted mb-0">Assignee: <%= @project.owner.email %></p>
+  </div>
+
+  <div class="card-body">
+    <h2 class="h5 mb-3">Update Status</h2>
+    <%= form_with model: @project, 
+                  url: project_path(@project), 
+                  method: :patch, 
+                  id: "status-form", 
+                  class: "mb-4",
+                  data: { remote: true } do |form| %>
+      <div class="mb-3">
+        <%= form.label :status, "Change Status", class: "form-label" %>
+        <%= form.select :status, 
+                     Project.statuses.keys.map { |s| [s.humanize, s] }, 
+                     { selected: @project.status },
+                     { id: "status-select", 
+                       class: "form-select",
+                       data: { previous_value: @project.status } } %>
+      </div>
+    <% end %>
+
+    <div id="history-section">
+      <%= render 'history', project: @project, histories: @histories %>
+    </div>
+
+    <h2 class="h5 mb-3">Add Comment</h2>
+    <%= form_with(model: [@project, ProjectEventHistory.new], local: true) do |form| %>
+      <%= form.hidden_field :event_type, value: "comment" %>
+      <div class="mb-3">
+        <%= form.label :content, class: "form-label" %>
+        <%= form.text_area :content, class: "form-control", rows: 3 %>
+      </div>
+      <%= form.submit "Add Comment", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

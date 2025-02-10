@@ -1,0 +1,35 @@
+<h2 class="h5 mb-3">Project History</h2>
+<div class="history-list">
+  <% histories.each do |history| %>
+    <div class="history-item">
+      <div class="history-meta d-flex align-items-center">
+        <span class="me-2"><%= history.created_at.strftime("%b %d, %Y at %I:%M %p") %></span>
+        <span class="text-primary"><%= history.user.email %></span>
+      </div>
+      <div class="history-content">
+        <% if history.event_type == 'status_change' %>
+          <% old_status, new_status = history.content.match(/from (.*?) to (.*)/).captures %>
+          Changed status from 
+          <span class="badge <%= status_badge_class(old_status) %>">
+            <%= format_status(old_status) %>
+          </span>
+          to
+          <span class="badge <%= status_badge_class(new_status) %>">
+            <%= format_status(new_status) %>
+          </span>
+        <% else %>
+          <div class="comment-box">
+            <i class="bi bi-chat-left-text text-primary me-2"></i>
+            <div class="comment-content">
+              <%= history.content %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="d-flex justify-content-center mt-4">
+  <%= paginate histories, remote: true %>
+</div> 

@@ -1,0 +1,13 @@
+.alert {
+  border: none;
+  border-radius: var(--radius-md);
+  
+  &.alert-danger {
+    background-color: #fee2e2;
+    color: #991b1b;
+    
+    ul {
+      padding-left: 1rem;
+    }
+  }
+}

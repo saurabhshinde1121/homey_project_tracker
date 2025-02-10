@@ -1,0 +1,63 @@
+<div class="row mb-4">
+  <div class="col">
+    <h1 class="h3">Projects</h1>
+  </div>
+  <div class="col text-end">
+    <%= link_to new_project_path, class: "btn btn-primary" do %>
+      <i class="bi bi-plus-lg me-1"></i> New Project
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <% @projects.each do |project| %>
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-truncate">
+            <%= link_to project.name, project_path(project), class: "text-decoration-none text-dark" %>
+          </h5>
+          <div class="mb-3">
+            <span class="badge bg-<%= project.status == 'completed' ? 'success' : 'primary' %>">
+              <%= project.status.humanize %>
+            </span>
+          </div>
+          <div class="text-muted small mb-2">
+            <i class="bi bi-person"></i> <%= project.owner.email %>
+          </div>
+          <div class="text-muted small">
+            <i class="bi bi-clock"></i> Created <%= time_ago_in_words(project.created_at) %> ago
+          </div>
+        </div>
+        <div class="card-footer bg-light">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <i class="bi bi-clock-history"></i>
+              <%= pluralize(project.project_event_histories.count, 'activity') %>
+              <% if project.project_event_histories.exists?(event_type: 'comment') %>
+                <span class="text-muted small">
+                  (<%= pluralize(project.project_event_histories.where(event_type: 'comment').count, 'comment') %>)
+                </span>
+              <% end %>
+            </div>
+            <div class="btn-group">
+              <%= link_to "View", project_path(project), class: "btn btn-sm btn-outline-primary" %>
+              <%= link_to "Edit", edit_project_path(project), class: "btn btn-sm btn-outline-secondary" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% if @projects.empty? %>
+  <div class="text-center py-5">
+    <div class="mb-3">
+      <i class="bi bi-folder2-open display-4 text-muted"></i>
+    </div>
+    <h3 class="h5 text-muted">No projects yet</h3>
+    <p class="text-muted">Get started by creating your first project</p>
+    <%= link_to "Create Project", new_project_path, class: "btn btn-primary" %>
+  </div>
+<% end %>
